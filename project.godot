@@ -8,10 +8,6 @@
 
 config_version=5
 
-[accessibility]
-
-general/accessibility_support=2
-
 [application]
 
 config/name="EDPMO Redux"
@@ -22,6 +18,10 @@ config/icon="res://icon.svg"
 [display]
 
 window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom="uid://bf85l6d3axxb"
 
 [rendering]
 
