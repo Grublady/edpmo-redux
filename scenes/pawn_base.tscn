@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmb60uxg2xkc1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sjvbu"]
+size = Vector3(0.1, 0.001, 0.1)
+
+[node name="Pawn Base" type="Area3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+pixel_size = 0.0001
+axis = 1
+double_sided = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_sjvbu")

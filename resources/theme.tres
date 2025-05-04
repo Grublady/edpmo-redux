@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bf85l6d3axxb"]
+
+[ext_resource type="SystemFont" uid="uid://b6bx2kso3vx0d" path="res://resources/font.tres" id="1_d4nwg"]
+
+[sub_resource type="FontVariation" id="FontVariation_y51rq"]
+base_font = ExtResource("1_d4nwg")
+variation_embolden = 1.2
+
+[sub_resource type="FontVariation" id="FontVariation_c8oe4"]
+base_font = ExtResource("1_d4nwg")
+variation_embolden = 1.2
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_xcpb1"]
+base_font = ExtResource("1_d4nwg")
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[resource]
+default_font = ExtResource("1_d4nwg")
+default_font_size = 24
+RichTextLabel/fonts/bold_font = SubResource("FontVariation_y51rq")
+RichTextLabel/fonts/bold_italics_font = SubResource("FontVariation_c8oe4")
+RichTextLabel/fonts/italics_font = SubResource("FontVariation_xcpb1")
+RichTextLabel/fonts/mono_font = ExtResource("1_d4nwg")
+RichTextLabel/fonts/normal_font = ExtResource("1_d4nwg")

@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://c6kip32erl8bp"]
+
+[ext_resource type="Theme" uid="uid://bf85l6d3axxb" path="res://resources/theme.tres" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://ni842rxj7d0r" path="res://sprites/ui/play.png" id="1_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://dcj7hprvf52ha" path="res://sprites/ui/quit.png" id="2_bqqt6"]
+[ext_resource type="Script" uid="uid://beo7th5l37nds" path="res://scripts/play_button.gd" id="3_wu84c"]
+[ext_resource type="Script" uid="uid://bc53bj7kti5od" path="res://scripts/quit_button.gd" id="5_8ln24"]
+[ext_resource type="AudioStream" uid="uid://detn0ujs8wv34" path="res://music/resentful_proprietor.ogg" id="6_rtw2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wu84c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ln24"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtw2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa1go"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
+
+[sub_resource type="Theme" id="Theme_jk1qb"]
+Button/colors/icon_focus_color = Color(0.783523, 0.783523, 0.783523, 1)
+Button/colors/icon_hover_color = Color(0.903598, 0.903598, 0.903598, 1)
+Button/colors/icon_hover_pressed_color = Color(0.743482, 0.743482, 0.743482, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(0.74558, 0.74558, 0.74558, 1)
+Button/constants/icon_max_width = 300
+Button/styles/disabled = SubResource("StyleBoxEmpty_bqqt6")
+Button/styles/focus = SubResource("StyleBoxEmpty_wu84c")
+Button/styles/hover = SubResource("StyleBoxEmpty_8ln24")
+Button/styles/hover_pressed = SubResource("StyleBoxEmpty_rtw2f")
+Button/styles/normal = SubResource("StyleBoxEmpty_oa1go")
+Button/styles/pressed = SubResource("StyleBoxEmpty_tbmy8")
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bqqt6")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Title Label" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 90
+theme_override_font_sizes/italics_font_size = 90
+theme_override_font_sizes/mono_font_size = 90
+theme_override_font_sizes/normal_font_size = 90
+theme_override_font_sizes/bold_font_size = 90
+bbcode_enabled = true
+text = "Elves, Don't Piss Me Off!"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Button Container" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_jk1qb")
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Play Button" type="Button" parent="CenterContainer/VBoxContainer/Button Container"]
+layout_mode = 2
+icon = ExtResource("1_ekxnf")
+icon_alignment = 1
+script = ExtResource("3_wu84c")
+
+[node name="Quit Button" type="Button" parent="CenterContainer/VBoxContainer/Button Container"]
+layout_mode = 2
+icon = ExtResource("2_bqqt6")
+icon_alignment = 1
+script = ExtResource("5_8ln24")
+
+[node name="Menu Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_rtw2f")
+autoplay = true

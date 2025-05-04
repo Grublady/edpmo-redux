@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://doun6uq5joi5a"]
+
+[ext_resource type="PackedScene" uid="uid://bmb60uxg2xkc1" path="res://scenes/pawn_base.tscn" id="1_cbbxq"]
+[ext_resource type="Texture2D" uid="uid://cjqjyany2ddik" path="res://sprites/boardgame/pawn_blue.png" id="2_ah1dt"]
+
+[node name="Pawn (Blue)" instance=ExtResource("1_cbbxq")]
+
+[node name="Sprite3D" parent="." index="0"]
+flip_h = true
+texture = ExtResource("2_ah1dt")

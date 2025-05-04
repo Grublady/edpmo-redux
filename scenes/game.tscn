@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3 uid="uid://qt1bym4tg58b"]
+
+[ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://curfnqcsgsfrh" path="res://sprites/boardgame/game_board.png" id="1_uwrxv"]
+[ext_resource type="AudioStream" uid="uid://b7tr5gbg81sr4" path="res://music/do_not_disturb_B.ogg" id="2_gee14"]
+[ext_resource type="PackedScene" uid="uid://doun6uq5joi5a" path="res://scenes/pawn_blue.tscn" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://7wgbjrjj13u3" path="res://scripts/game_music.gd" id="3_gee14"]
+[ext_resource type="PackedScene" uid="uid://pajerr1pwy8w" path="res://scenes/pawn_red.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://fvqyk2tfaupp" path="res://scenes/die.tscn" id="4_iywne"]
+[ext_resource type="Texture2D" uid="uid://dovk8imf7qhto" path="res://sprites/Titelbild.png" id="5_iywne"]
+[ext_resource type="Script" uid="uid://b5fsvb2fdare7" path="res://scripts/game_board.gd" id="7_vtaks"]
+
+[sub_resource type="Environment" id="Environment_iywne"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_0tnpc"]
+stream_count = 2
+stream_0/stream = ExtResource("1_u5sy4")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_gee14")
+stream_1/volume = -60.0
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_0tnpc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.5, 0.5)
+environment = SubResource("Environment_iywne")
+
+[node name="Game Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamSynchronized_0tnpc")
+autoplay = true
+script = ExtResource("3_gee14")
+
+[node name="Opponent" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.075, 0.2, -0.5)
+pixel_size = 0.001
+render_priority = -2
+texture = ExtResource("5_iywne")
+region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="Game Board" type="Sprite3D" parent="."]
+pixel_size = 0.0003
+axis = 1
+double_sided = false
+render_priority = -1
+texture = ExtResource("1_uwrxv")
+script = ExtResource("7_vtaks")
+
+[node name="Die" parent="Game Board" instance=ExtResource("4_iywne")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.2, 0, 0.25)
+
+[node name="Opponent Timer" type="Timer" parent="Game Board"]
+
+[node name="Pawn (Blue) 1" parent="Game Board" instance=ExtResource("2_yqjtg")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.2, 0, 0.2)
+
+[node name="Pawn (Blue) 2" parent="Game Board" instance=ExtResource("2_yqjtg")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.3, 0, 0.2)
+
+[node name="Pawn (Blue) 3" parent="Game Board" instance=ExtResource("2_yqjtg")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.2, 0, 0.3)
+
+[node name="Pawn (Blue) 4" parent="Game Board" instance=ExtResource("2_yqjtg")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.3, 0, 0.3)
+
+[node name="Pawn (Red) 1" parent="Game Board" instance=ExtResource("3_lnu2h")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.2, 0, -0.2)
+
+[node name="Pawn (Red) 2" parent="Game Board" instance=ExtResource("3_lnu2h")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.3, 0, -0.2)
+
+[node name="Pawn (Red) 3" parent="Game Board" instance=ExtResource("3_lnu2h")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.2, 0, -0.3)
+
+[node name="Pawn (Red) 4" parent="Game Board" instance=ExtResource("3_lnu2h")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.3, 0, -0.3)
+
+[node name="Node3D" type="Node3D" parent="Game Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0702772, 0, 0.208633)
