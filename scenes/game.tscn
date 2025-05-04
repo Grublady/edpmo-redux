@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://qt1bym4tg58b"]
+[gd_scene load_steps=17 format=3 uid="uid://qt1bym4tg58b"]
 
 [ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://curfnqcsgsfrh" path="res://sprites/boardgame/game_board.png" id="1_uwrxv"]
 [ext_resource type="AudioStream" uid="uid://b7tr5gbg81sr4" path="res://music/do_not_disturb_B.ogg" id="2_gee14"]
+[ext_resource type="Script" uid="uid://d7hs24tebh0a" path="res://scripts/game_camera.gd" id="2_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://doun6uq5joi5a" path="res://scenes/pawn_blue.tscn" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://7wgbjrjj13u3" path="res://scripts/game_music.gd" id="3_gee14"]
 [ext_resource type="PackedScene" uid="uid://pajerr1pwy8w" path="res://scenes/pawn_red.tscn" id="3_lnu2h"]
@@ -34,8 +35,10 @@ size = Vector3(0.6, 0.001, 0.6)
 script = ExtResource("1_0tnpc")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0.5, 0.5)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.5, 0.7)
 environment = SubResource("Environment_iywne")
+fov = 60.0
+script = ExtResource("2_kvpfn")
 
 [node name="Game Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamSynchronized_0tnpc")
