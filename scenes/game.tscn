@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qt1bym4tg58b"]
+[gd_scene load_steps=21 format=3 uid="uid://qt1bym4tg58b"]
 
 [ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://fvqyk2tfaupp" path="res://scenes/die.tscn" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://dovk8imf7qhto" path="res://sprites/Titelbild.png" id="5_iywne"]
 [ext_resource type="Script" uid="uid://b5fsvb2fdare7" path="res://scripts/game_board.gd" id="7_vtaks"]
+[ext_resource type="Texture2D" uid="uid://bmsfp0fxtincq" path="res://sprites/ui/card.png" id="12_dinhu"]
+[ext_resource type="Texture2D" uid="uid://br7tg5mh4haw6" path="res://sprites/characters/rangercut.png" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://b1u505w81iftu" path="res://scripts/quest_overlay.gd" id="12_trtic"]
+[ext_resource type="Script" uid="uid://reaf63b6wf7" path="res://scripts/quest_character.gd" id="14_ir15t"]
 
 [sub_resource type="Environment" id="Environment_iywne"]
 background_mode = 1
@@ -101,3 +105,55 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.3, 0, -0.3)
 
 [node name="Node3D" type="Node3D" parent="Game Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0702772, 0, 0.208633)
+
+[node name="Quest Overlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_trtic")
+
+[node name="MarginContainer" type="MarginContainer" parent="Quest Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="ColorRect" type="ColorRect" parent="Quest Overlay/MarginContainer"]
+layout_mode = 2
+color = Color(0.589096, 0.589096, 0.589096, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Quest Overlay/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Quest Overlay/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Quest Character" type="MarginContainer" parent="Quest Overlay/MarginContainer/MarginContainer/HBoxContainer" node_paths=PackedStringArray("music_player")]
+layout_mode = 2
+script = ExtResource("14_ir15t")
+music_player = NodePath("../../../../../Game Music")
+
+[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/MarginContainer/HBoxContainer/Quest Character"]
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_dinhu")
+expand_mode = 3
+stretch_mode = 4
