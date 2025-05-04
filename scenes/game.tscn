@@ -34,12 +34,18 @@ stream_1/stream = ExtResource("2_gee14")
 stream_1/volume = -60.0
 
 [sub_resource type="Gradient" id="Gradient_vtaks"]
+colors = PackedColorArray(0.114, 0.141233, 0.2, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kvpfn"]
 gradient = SubResource("Gradient_vtaks")
+height = 32
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dinhu"]
-size = Vector3(0.6, 0.001, 0.6)
+size = Vector3(0.64, 0.001, 0.32)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rysoc"]
 shader = ExtResource("13_ca42v")
@@ -100,11 +106,17 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.2, 0, 0.25)
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.2, 0, -0.25)
 
 [node name="Pass Button" type="Area3D" parent="Game Board"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.1, 0)
+transform = Transform3D(0.259808, 0.075, 0.129904, 0, 0.259808, -0.15, -0.15, 0.129904, 0.225, -0.45, 0.05, 0.25)
 
 [node name="Sprite3D" type="Sprite3D" parent="Game Board/Pass Button"]
 axis = 1
 texture = SubResource("GradientTexture2D_kvpfn")
+
+[node name="Label3D" type="Label3D" parent="Game Board/Pass Button"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.05, 0)
+pixel_size = 0.0025
+text = "Pass"
+font_size = 64
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Game Board/Pass Button"]
 shape = SubResource("BoxShape3D_dinhu")
