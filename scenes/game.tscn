@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qt1bym4tg58b"]
+[gd_scene load_steps=16 format=3 uid="uid://qt1bym4tg58b"]
 
 [ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
@@ -21,6 +21,14 @@ stream_0/stream = ExtResource("1_u5sy4")
 stream_0/volume = 0.0
 stream_1/stream = ExtResource("2_gee14")
 stream_1/volume = -60.0
+
+[sub_resource type="Gradient" id="Gradient_vtaks"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kvpfn"]
+gradient = SubResource("Gradient_vtaks")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dinhu"]
+size = Vector3(0.6, 0.001, 0.6)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_0tnpc")
@@ -51,6 +59,16 @@ script = ExtResource("7_vtaks")
 
 [node name="Die" parent="Game Board" instance=ExtResource("4_iywne")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.2, 0, 0.25)
+
+[node name="Pass Button" type="Area3D" parent="Game Board"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.1, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Game Board/Pass Button"]
+axis = 1
+texture = SubResource("GradientTexture2D_kvpfn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Game Board/Pass Button"]
+shape = SubResource("BoxShape3D_dinhu")
 
 [node name="Opponent Timer" type="Timer" parent="Game Board"]
 

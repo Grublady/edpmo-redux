@@ -42,16 +42,35 @@ var pawn_positions_red: Array[int] = [
 ]
 
 @onready var die: Node3D = $Die
+@onready var pass_button: Area3D = $"Pass Button"
 @onready var opponent_timer: Timer = $"Opponent Timer"
 
 func _ready() -> void:
+	pass_button.input_event.connect(_on_pass_button_input_event)
 	for i in pawns_blue.size():
 		pawns_blue[i].input_event.connect(_on_player_pawn_input_event.bind(i))
 	if not is_player_turn:
-		move(0, 1)
+		_opponent_move()
 
 func _on_die_roll_finished(value: int) -> void:
 	rolled_value = value
+
+func _on_pass_button_input_event(
+	_camera: Node,
+	event: InputEvent,
+	_event_position: Vector3,
+	_normal: Vector3,
+	_shape_idx: int,
+) -> void:
+	if event is InputEventMouseButton and event.is_pressed():
+		if is_player_turn:
+			is_player_turn = false
+			rolled_value = -1
+			opponent_timer.stop()
+			opponent_timer.timeout.connect(_opponent_move, CONNECT_ONE_SHOT)
+			opponent_timer.start()
+			if die.roll_finished.is_connected(_on_die_roll_finished):
+				die.roll_finished.disconnect(_on_die_roll_finished)
 
 func _on_player_pawn_input_event(
 	_camera: Node,
@@ -102,10 +121,18 @@ func move(pawn: int, roll: int) -> bool:
 		pawn_positions = pawn_positions_red
 		pawn_node = pawns_red[pawn]
 	
-	if pawn_positions[pawn] + roll >= TOTAL_SPACE_COUNT:
+	var pos := pawn_positions[pawn]
+	
+	if pos == -1 and roll != 6:
 		return false
 	
-	pawn_positions[pawn] += roll
+	if pos + roll >= TOTAL_SPACE_COUNT:
+		return false
+	
+	if pos == -1:
+		pawn_positions[pawn] = 0
+	else:
+		pawn_positions[pawn] += roll
 	
 	if is_player_turn:
 		pawn_node.position = lookup_board_space_position(pawn_positions[pawn])
@@ -116,4 +143,6 @@ func move(pawn: int, roll: int) -> bool:
 	return true
 
 func _opponent_move() -> void:
-	move(1, randi_range(1, 5))
+	var valid := false
+	while not valid:
+		valid = move(1, randi_range(1, 6))
