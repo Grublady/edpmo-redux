@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://c4x5xo2boemcp"]
+
+[ext_resource type="Script" uid="uid://ctj7ss5pi23g2" path="res://scripts/quest_data.gd" id="1_6b3je"]
+
+[resource]
+script = ExtResource("1_6b3je")
+title = "Cursed Animal Calls"
+description = "All the animals in the forest started sounding like screaming babies. Rather than calming sounds of crickets, birds and the occasional coyote yelp, the day and nights have been full with a cacophony of wailing baby noises. Find out what caused this noisy chaos and please make it stop."
+metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

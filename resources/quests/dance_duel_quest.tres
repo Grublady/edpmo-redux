@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://csabbb54ge1d8"]
+
+[ext_resource type="Script" uid="uid://ctj7ss5pi23g2" path="res://scripts/quest_data.gd" id="1_6b3je"]
+
+[resource]
+script = ExtResource("1_6b3je")
+title = "Dance Duel!"
+description = "Help choreograph a high-stakes dance competition to, once and for all, settle a dispute between rival goblin dance troupes in nearby caverns. The heated rivalry has wrecked havoc on local crops with the non-stop dancing."
+metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

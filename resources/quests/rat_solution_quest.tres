@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://duafya1x8b226"]
+
+[ext_resource type="Script" uid="uid://ctj7ss5pi23g2" path="res://scripts/quest_data.gd" id="1_6b3je"]
+
+[resource]
+script = ExtResource("1_6b3je")
+title = "Rat Solution"
+description = "There’s at least 500 rats in the tavern basement. Kill them. Relocate them. Teach them to cook and put them to work. Whatever, just get them out of the tavern basement, they need that space for storage."
+metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

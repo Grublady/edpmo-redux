@@ -1,21 +1,25 @@
 @tool
 extends PanelContainer
 
-@export var title: String:
+@export var data: QuestData:
 	set(new_value):
-		title = new_value
-		if is_instance_valid(title_label):
-			title_label.text = title
-
-@export_multiline var body: String:
-	set(new_value):
-		body = new_value
-		if is_instance_valid(body_label):
-			body_label.text = body
+		if is_instance_valid(data):
+			data.changed.disconnect(_update_data)
+		data = new_value
+		if is_instance_valid(data):
+			data.changed.connect(_update_data)
+		_update_data()
 
 @onready var title_label: RichTextLabel = $VBoxContainer/Title/RichTextLabel
 @onready var body_label: RichTextLabel = $VBoxContainer/Body/RichTextLabel
 
 func _ready() -> void:
-	title_label.text = title
-	body_label.text = body
+	_update_data()
+
+func _update_data() -> void:
+	if not is_instance_valid(data):
+		return
+	if is_instance_valid(title_label):
+		title_label.text = data.title
+	if is_instance_valid(body_label):
+		body_label.text = data.description

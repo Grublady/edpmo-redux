@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://cxll8mef17478"]
+
+[ext_resource type="Script" uid="uid://ctj7ss5pi23g2" path="res://scripts/quest_data.gd" id="1_6b3je"]
+
+[resource]
+script = ExtResource("1_6b3je")
+title = "Mystery Hole"
+description = "Dig a mystery hole. What it’s for is none of your damned business. (It should be big enough for a small horse with the upper body of a small person for a head.)"
+metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://ciwf0nl6scf4i"]
+
+[ext_resource type="Script" uid="uid://ctj7ss5pi23g2" path="res://scripts/quest_data.gd" id="1_6b3je"]
+
+[resource]
+script = ExtResource("1_6b3je")
+title = "Dave Needs Cabbage and Cheese"
+description = "Dave loves cabbage and cheese, but he can’t leave his house for legal reasons. Help Dave out."
+metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

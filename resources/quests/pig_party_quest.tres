@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=2 format=3 uid="uid://dtppnxp18lm88"]
+
+[ext_resource type="Script" uid="uid://ctj7ss5pi23g2" path="res://scripts/quest_data.gd" id="1_6b3je"]
+
+[resource]
+script = ExtResource("1_6b3je")
+title = "Pig Party"
+description = "Kill the pack of wild night pigs that have been running wild through the town at night and keeping everyone awake."
+metadata/_custom_type_script = "uid://ctj7ss5pi23g2"
