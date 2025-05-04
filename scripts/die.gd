@@ -2,6 +2,7 @@ extends Area3D
 
 signal roll_finished(value: int)
 
+@export var interactible: bool = true
 @export var roll_duration: float = 0.5
 @export var rolling_frame_time: float = 0.075
 
@@ -18,6 +19,7 @@ var has_mouse: bool = false:
 			return
 		has_mouse = new_value
 		_update_modulate()
+var rolled_value: int = -1
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
@@ -41,9 +43,9 @@ func _process(delta: float) -> void:
 			sprite.frame = (new_frame)
 	elif rolling_elapsed >= roll_duration:
 		rolling_elapsed = -1
-		var result := randi_range(1, 6)
-		sprite.frame = result - 1
-		roll_finished.emit(result)
+		rolled_value = randi_range(1, 6)
+		sprite.frame = rolled_value - 1
+		roll_finished.emit(rolled_value)
 		active = false
 
 func _input_event(
@@ -53,6 +55,8 @@ func _input_event(
 	_normal: Vector3,
 	_shape_idx: int
 ) -> void:
+	if not interactible:
+		return
 	if event is InputEventMouseButton and event.is_pressed():
 		if active and (rolling_elapsed == -1):
 			start_roll()

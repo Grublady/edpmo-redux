@@ -4,17 +4,6 @@ const TOTAL_SPACE_COUNT: int = 44
 const SPACE_DISTANCE: float = 0.07
 const FIRST_SPACE := Vector3(0, 0, 0.35) + (SPACE_DISTANCE * Vector3.LEFT)
 
-var is_player_turn: bool = false:
-	set(new_value):
-		if new_value == is_player_turn:
-			return
-		is_player_turn = new_value
-		die.active = is_player_turn
-		if is_player_turn:
-			die.roll_finished.connect(_on_die_roll_finished, CONNECT_ONE_SHOT)
-
-var rolled_value: int = -1
-
 var pawn_positions_blue: Array[int] = [
 	-1,
 	-1,
@@ -27,6 +16,10 @@ var pawn_positions_red: Array[int] = [
 	-1,
 	-1,
 ]
+
+var rolled_value: int = -1
+
+var _is_player_turn: bool = true
 
 @onready var pawns_blue: Array[CollisionObject3D] = [
 	$"Pawn (Blue) 1",
@@ -41,7 +34,8 @@ var pawn_positions_red: Array[int] = [
 	$"Pawn (Red) 4",
 ]
 
-@onready var die: Node3D = $Die
+@onready var player_die: Node3D = $"Player Die"
+@onready var opponent_die: Node3D = $"Opponent Die"
 @onready var pass_button: Area3D = $"Pass Button"
 @onready var opponent_timer: Timer = $"Opponent Timer"
 
@@ -49,8 +43,7 @@ func _ready() -> void:
 	pass_button.input_event.connect(_on_pass_button_input_event)
 	for i in pawns_blue.size():
 		pawns_blue[i].input_event.connect(_on_player_pawn_input_event.bind(i))
-	if not is_player_turn:
-		_opponent_move()
+	pass_turn(true)
 
 func _on_die_roll_finished(value: int) -> void:
 	rolled_value = value
@@ -62,15 +55,10 @@ func _on_pass_button_input_event(
 	_normal: Vector3,
 	_shape_idx: int,
 ) -> void:
+	if not is_player_turn() or rolled_value == -1:
+		return
 	if event is InputEventMouseButton and event.is_pressed():
-		if is_player_turn:
-			is_player_turn = false
-			rolled_value = -1
-			opponent_timer.stop()
-			opponent_timer.timeout.connect(_opponent_move, CONNECT_ONE_SHOT)
-			opponent_timer.start()
-			if die.roll_finished.is_connected(_on_die_roll_finished):
-				die.roll_finished.disconnect(_on_die_roll_finished)
+		pass_turn(false)
 
 func _on_player_pawn_input_event(
 	_camera: Node,
@@ -80,13 +68,10 @@ func _on_player_pawn_input_event(
 	_shape_idx: int,
 	pawn: int
 ) -> void:
+	if not is_player_turn() or rolled_value == -1:
+		return
 	if event is InputEventMouseButton and event.is_pressed():
-		if is_player_turn and rolled_value != -1:
-			if move(pawn, rolled_value):
-				rolled_value = -1
-				opponent_timer.stop()
-				opponent_timer.timeout.connect(_opponent_move, CONNECT_ONE_SHOT)
-				opponent_timer.start()
+		try_move(pawn, rolled_value)
 
 func lookup_board_space_position(space: int) -> Vector3:
 	return (
@@ -111,10 +96,10 @@ func lookup_board_space_position(space: int) -> Vector3:
 
 ## Attempts to perform the specified move
 ## and returns a bool indicating if it was successful.
-func move(pawn: int, roll: int) -> bool:
+func try_move(pawn: int, roll: int) -> bool:
 	var pawn_positions: Array[int]
 	var pawn_node: Node3D
-	if is_player_turn:
+	if is_player_turn():
 		pawn_positions = pawn_positions_blue
 		pawn_node = pawns_blue[pawn]
 	else:
@@ -134,15 +119,39 @@ func move(pawn: int, roll: int) -> bool:
 	else:
 		pawn_positions[pawn] += roll
 	
-	if is_player_turn:
+	if is_player_turn():
 		pawn_node.position = lookup_board_space_position(pawn_positions[pawn])
 	else:
 		pawn_node.position = lookup_board_space_position(pawn_positions[pawn]).rotated(Vector3.UP, PI)
 	
-	is_player_turn = not is_player_turn
+	pass_turn()
 	return true
 
+func pass_turn(to_player: bool = not _is_player_turn) -> void:
+	_is_player_turn = to_player
+	
+	rolled_value = -1
+	player_die.active = _is_player_turn
+	opponent_die.active = not _is_player_turn
+	
+	if _is_player_turn:
+		player_die.roll_finished.connect(_on_die_roll_finished, CONNECT_ONE_SHOT)
+	else:
+		opponent_timer.stop()
+		opponent_timer.timeout.connect(_opponent_move, CONNECT_ONE_SHOT)
+		opponent_timer.start()
+		opponent_die.roll_finished.connect(_on_die_roll_finished, CONNECT_ONE_SHOT)
+
+func is_player_turn() -> bool:
+	return _is_player_turn
+
 func _opponent_move() -> void:
-	var valid := false
-	while not valid:
-		valid = move(1, randi_range(1, 6))
+	opponent_die.start_roll()
+	await opponent_die.roll_finished
+	opponent_timer.stop()
+	opponent_timer.start()
+	await opponent_timer.timeout
+	for i in pawns_red.size():
+		if try_move(i, rolled_value):
+			return
+	pass_turn(true)
