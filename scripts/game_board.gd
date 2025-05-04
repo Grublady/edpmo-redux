@@ -47,6 +47,8 @@ func _ready() -> void:
 
 func _on_die_roll_finished(value: int) -> void:
 	rolled_value = value
+	if is_player_turn():
+		pass_button.active = true
 
 func _on_pass_button_input_event(
 	_camera: Node,
@@ -114,6 +116,12 @@ func try_move(pawn: int, roll: int) -> bool:
 	if pos + roll >= TOTAL_SPACE_COUNT:
 		return false
 	
+	for i in pawn_positions.size():
+		if i == pawn:
+			continue
+		if pawn_positions[i] == pos + roll:
+			return false
+	
 	if pos == -1:
 		pawn_positions[pawn] = 0
 	else:
@@ -137,6 +145,7 @@ func pass_turn(to_player: bool = not _is_player_turn) -> void:
 	if _is_player_turn:
 		player_die.roll_finished.connect(_on_die_roll_finished, CONNECT_ONE_SHOT)
 	else:
+		pass_button.active = false
 		opponent_timer.stop()
 		opponent_timer.timeout.connect(_opponent_move, CONNECT_ONE_SHOT)
 		opponent_timer.start()

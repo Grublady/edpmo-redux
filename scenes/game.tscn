@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://qt1bym4tg58b"]
+[gd_scene load_steps=31 format=3 uid="uid://qt1bym4tg58b"]
 
 [ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://fvqyk2tfaupp" path="res://scenes/die.tscn" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://dovk8imf7qhto" path="res://sprites/Titelbild.png" id="5_iywne"]
 [ext_resource type="Script" uid="uid://b5fsvb2fdare7" path="res://scripts/game_board.gd" id="7_vtaks"]
+[ext_resource type="Script" uid="uid://bu0saqmb5fl51" path="res://scripts/pass_button.gd" id="10_37s47"]
 [ext_resource type="Texture2D" uid="uid://br7tg5mh4haw6" path="res://sprites/characters/rangercut.png" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://b1u505w81iftu" path="res://scripts/quest_overlay.gd" id="12_trtic"]
 [ext_resource type="Shader" uid="uid://cqwbkma8b7cgx" path="res://shaders/blur.gdshader" id="13_ca42v"]
@@ -107,6 +108,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.2, 0, -0.25)
 
 [node name="Pass Button" type="Area3D" parent="Game Board"]
 transform = Transform3D(0.259808, 0.075, 0.129904, 0, 0.259808, -0.15, -0.15, 0.129904, 0.225, -0.45, 0.05, 0.25)
+script = ExtResource("10_37s47")
 
 [node name="Sprite3D" type="Sprite3D" parent="Game Board/Pass Button"]
 axis = 1
