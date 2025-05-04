@@ -10,8 +10,8 @@ extends PanelContainer
 			data.changed.connect(_update_data)
 		_update_data()
 
-@onready var title_label: RichTextLabel = $VBoxContainer/Title/RichTextLabel
-@onready var body_label: RichTextLabel = $VBoxContainer/Body/RichTextLabel
+@onready var title_label: RichTextLabel = $Title/MarginContainer/RichTextLabel
+@onready var body_label: RichTextLabel = $Body/MarginContainer/RichTextLabel
 
 func _ready() -> void:
 	_update_data()
