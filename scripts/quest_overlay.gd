@@ -5,6 +5,29 @@ const EXIT_TIME: float = 0.5
 
 var tween: Tween
 
+var adventurer_names: Array[String] = [
+	"Norjor Poplarblossom",
+	"Dave Roberts",
+	"Hiro Izeth",
+]
+
+@onready var adventurer_textures: Array[Texture2D] = [
+	ResourceLoader.load("res://sprites/characters/clericcut.png"),
+	ResourceLoader.load("res://sprites/characters/druidcut.png"),
+	ResourceLoader.load("res://sprites/characters/magecut.png"),
+	ResourceLoader.load("res://sprites/characters/rangercut.png"),
+]
+
+@onready var quests: Array[QuestData] = [
+	ResourceLoader.load("res://resources/quests/cursed_animal_calls_quest.tres"),
+	ResourceLoader.load("res://resources/quests/dance_duel_quest.tres"),
+	ResourceLoader.load("res://resources/quests/dave_needs_quest.tres"),
+	ResourceLoader.load("res://resources/quests/hands_wanted_quest.tres"),
+	ResourceLoader.load("res://resources/quests/mystery_hole_quest.tres"),
+	ResourceLoader.load("res://resources/quests/pig_party_quest.tres"),
+	ResourceLoader.load("res://resources/quests/rat_solution_quest.tres"),
+]
+
 func _ready() -> void:
 	position = Vector2(size.x, 0)
 	hide()
@@ -39,6 +62,9 @@ func exit_view() -> void:
 	tween.tween_callback(hide)
 
 func generate_adventurer() -> void:
-	var adv_name := "Norjor poplarblossom"
-	$MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Title.text = "[b]" + adv_name + "[/b] appears!"
-	$"MarginContainer/PanelContainer/HBoxContainer/Quest Character/TextureRect".texture = ResourceLoader.load("res://sprites/characters/druidcut.png")
+	$MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Title.text = "[b]" + adventurer_names.pick_random() + "[/b] appears!"
+	$"MarginContainer/PanelContainer/HBoxContainer/Quest Character/TextureRect".texture = adventurer_textures.pick_random()
+	quests.shuffle()
+	$MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card.data = quests[0]
+	$MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card2.data = quests[1]
+	$MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card3.data = quests[2]

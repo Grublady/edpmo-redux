@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_6b3je")
-title = "Dave Needs Cabbage and Cheese"
+title = "Dave Needs Cabbage & Cheese"
 description = "Dave loves cabbage and cheese, but he can’t leave his house for legal reasons. Help Dave out."
 metadata/_custom_type_script = "uid://ctj7ss5pi23g2"
