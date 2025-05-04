@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmb60uxg2xkc1"]
+[gd_scene load_steps=3 format=3 uid="uid://bmb60uxg2xkc1"]
+
+[ext_resource type="Script" uid="uid://dox3l7shc7mhd" path="res://scripts/pawn_base.gd" id="1_ymmno"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sjvbu"]
 size = Vector3(0.1, 0.001, 0.1)
 
 [node name="Pawn Base" type="Area3D"]
+script = ExtResource("1_ymmno")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)

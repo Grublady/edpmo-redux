@@ -5,7 +5,7 @@ const SPACE_DISTANCE: float = 0.07
 const FIRST_SPACE := Vector3(0, 0, 0.35) + (SPACE_DISTANCE * Vector3.LEFT)
 
 var pawn_positions_blue: Array[int] = [
-	-1,
+	13,
 	-1,
 	-1,
 	-1,
@@ -127,6 +127,8 @@ func try_move(pawn: int, roll: int) -> bool:
 	else:
 		pawn_positions[pawn] += roll
 	
+	_check_bump(pawn_positions[pawn])
+	
 	if is_player_turn():
 		pawn_node.position = lookup_board_space_position(pawn_positions[pawn])
 	else:
@@ -153,6 +155,31 @@ func pass_turn(to_player: bool = not _is_player_turn) -> void:
 
 func is_player_turn() -> bool:
 	return _is_player_turn
+
+func _check_bump(at_space: int) -> void:
+	if at_space >= 40:
+		# Home zone
+		return
+	
+	var other_player_pawn_positions: Array[int]
+	if is_player_turn():
+		other_player_pawn_positions = pawn_positions_red
+	else:
+		other_player_pawn_positions = pawn_positions_blue
+	
+	var transformed_space := (at_space + 20) % 40
+	var bumped_pawn := other_player_pawn_positions.find(transformed_space)
+	
+	if bumped_pawn == -1:
+		return
+	
+	other_player_pawn_positions[bumped_pawn] = -1
+	var pawns: Array[CollisionObject3D]
+	if is_player_turn():
+		pawns = pawns_red
+	else:
+		pawns = pawns_blue
+	pawns[bumped_pawn].position = pawns[bumped_pawn].initial_position
 
 func _opponent_move() -> void:
 	opponent_die.start_roll()
