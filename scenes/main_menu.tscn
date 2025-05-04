@@ -1,11 +1,25 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6kip32erl8bp"]
+[gd_scene load_steps=18 format=3 uid="uid://c6kip32erl8bp"]
 
 [ext_resource type="Theme" uid="uid://bf85l6d3axxb" path="res://resources/theme.tres" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://ni842rxj7d0r" path="res://sprites/ui/play.png" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://dcj7hprvf52ha" path="res://sprites/ui/quit.png" id="2_bqqt6"]
+[ext_resource type="SystemFont" uid="uid://7qva8cy76vtt" path="res://resources/title_font.tres" id="2_oa1go"]
 [ext_resource type="Script" uid="uid://beo7th5l37nds" path="res://scripts/play_button.gd" id="3_wu84c"]
 [ext_resource type="Script" uid="uid://bc53bj7kti5od" path="res://scripts/quit_button.gd" id="5_8ln24"]
 [ext_resource type="AudioStream" uid="uid://detn0ujs8wv34" path="res://music/resentful_proprietor.ogg" id="6_rtw2f"]
+
+[sub_resource type="FontVariation" id="FontVariation_5dd4i"]
+base_font = ExtResource("2_oa1go")
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_lgwnu"]
+base_font = ExtResource("2_oa1go")
+variation_embolden = 1.2
+variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_flqon"]
+base_font = ExtResource("2_oa1go")
+variation_embolden = 1.2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
 
@@ -57,6 +71,11 @@ alignment = 1
 
 [node name="Title Label" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_oa1go")
+theme_override_fonts/mono_font = ExtResource("2_oa1go")
+theme_override_fonts/italics_font = SubResource("FontVariation_5dd4i")
+theme_override_fonts/bold_italics_font = SubResource("FontVariation_lgwnu")
+theme_override_fonts/bold_font = SubResource("FontVariation_flqon")
 theme_override_font_sizes/bold_italics_font_size = 90
 theme_override_font_sizes/italics_font_size = 90
 theme_override_font_sizes/mono_font_size = 90

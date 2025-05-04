@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qt1bym4tg58b"]
+[gd_scene load_steps=27 format=3 uid="uid://qt1bym4tg58b"]
 
 [ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
@@ -14,7 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://bmsfp0fxtincq" path="res://sprites/ui/card.png" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://br7tg5mh4haw6" path="res://sprites/characters/rangercut.png" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://b1u505w81iftu" path="res://scripts/quest_overlay.gd" id="12_trtic"]
+[ext_resource type="Shader" uid="uid://cqwbkma8b7cgx" path="res://shaders/blur.gdshader" id="13_ca42v"]
+[ext_resource type="Script" uid="uid://bm8h7sq6ju27f" path="res://scripts/overlay_bg.gd" id="13_rysoc"]
 [ext_resource type="Script" uid="uid://reaf63b6wf7" path="res://scripts/quest_character.gd" id="14_ir15t"]
+[ext_resource type="Theme" uid="uid://bf85l6d3axxb" path="res://resources/theme.tres" id="14_ssvqc"]
 
 [sub_resource type="Environment" id="Environment_iywne"]
 background_mode = 1
@@ -34,6 +37,29 @@ gradient = SubResource("Gradient_vtaks")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dinhu"]
 size = Vector3(0.6, 0.001, 0.6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rysoc"]
+shader = ExtResource("13_ca42v")
+shader_parameter/radius = 8
+shader_parameter/amount = 1.0
+shader_parameter/horizontal = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ssvqc"]
+shader = ExtResource("13_ca42v")
+shader_parameter/radius = 8
+shader_parameter/amount = 1.0
+shader_parameter/horizontal = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir15t"]
+content_margin_left = 25.0
+content_margin_top = 25.0
+content_margin_right = 25.0
+content_margin_bottom = 25.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_0tnpc")
@@ -106,6 +132,35 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.3, 0, -0.3)
 [node name="Node3D" type="Node3D" parent="Game Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0702772, 0, 0.208633)
 
+[node name="Overlay BG" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_behavior_recursive = 1
+mouse_behavior_recursive = 1
+script = ExtResource("13_rysoc")
+
+[node name="Blur Vertical" type="ColorRect" parent="Overlay BG"]
+material = SubResource("ShaderMaterial_rysoc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blur Horizontal" type="ColorRect" parent="Overlay BG"]
+material = SubResource("ShaderMaterial_ssvqc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Quest Overlay" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -113,6 +168,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("14_ssvqc")
 script = ExtResource("12_trtic")
 
 [node name="MarginContainer" type="MarginContainer" parent="Quest Overlay"]
@@ -127,33 +183,70 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="ColorRect" type="ColorRect" parent="Quest Overlay/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Quest Overlay/MarginContainer"]
 layout_mode = 2
-color = Color(0.589096, 0.589096, 0.589096, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ir15t")
 
-[node name="MarginContainer" type="MarginContainer" parent="Quest Overlay/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/separation = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Quest Overlay/MarginContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Quest Character" type="MarginContainer" parent="Quest Overlay/MarginContainer/MarginContainer/HBoxContainer" node_paths=PackedStringArray("music_player")]
+[node name="Quest Character" type="MarginContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer" node_paths=PackedStringArray("music_player")]
 layout_mode = 2
 script = ExtResource("14_ir15t")
 music_player = NodePath("../../../../../Game Music")
 
-[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/MarginContainer/HBoxContainer/Quest Character"]
+[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/Quest Character"]
 layout_mode = 2
 texture = ExtResource("12_kvuet")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Title" type="RichTextLabel" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/bold_italics_font_size = 36
+theme_override_font_sizes/italics_font_size = 36
+theme_override_font_sizes/mono_font_size = 36
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]Adventurer Name[/b] appears!"
+fit_content = true
+
+[node name="Subtitle" type="RichTextLabel" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/normal_font_size = 24
+text = "Assign them a suitable quest to make them go away..."
+fit_content = true
+
+[node name="Cards" type="HBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("12_dinhu")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("12_dinhu")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards"]
+layout_mode = 2
+size_flags_horizontal = 6
 texture = ExtResource("12_dinhu")
 expand_mode = 3
 stretch_mode = 4
