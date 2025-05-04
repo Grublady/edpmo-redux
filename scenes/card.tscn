@@ -1,47 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch06po7ssar7o"]
+[gd_scene load_steps=3 format=3 uid="uid://ch06po7ssar7o"]
 
 [ext_resource type="Script" uid="uid://cioowq16fec8h" path="res://scripts/card.gd" id="1_6u4wf"]
 [ext_resource type="Texture2D" uid="uid://bmsfp0fxtincq" path="res://sprites/ui/card.png" id="1_d81rb"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6u4wf"]
-
-[node name="Card" type="PanelContainer"]
-offset_right = 143.902
-offset_bottom = 295.0
+[node name="Card" type="TextureRect"]
+offset_right = 125.0
+offset_bottom = 256.0
 size_flags_horizontal = 6
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6u4wf")
-script = ExtResource("1_6u4wf")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
 texture = ExtResource("1_d81rb")
 expand_mode = 3
-stretch_mode = 4
+script = ExtResource("1_6u4wf")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 250
-
-[node name="Title" type="AspectRatioContainer" parent="."]
-layout_mode = 2
-ratio = 3.0
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Title"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Title/MarginContainer"]
-layout_mode = 2
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.02
+anchor_right = 0.96
+anchor_bottom = 0.155
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
 theme_override_font_sizes/bold_italics_font_size = 18
 theme_override_font_sizes/italics_font_size = 18
@@ -53,22 +31,14 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Body" type="AspectRatioContainer" parent="."]
-layout_mode = 2
-ratio = 0.6
-stretch_mode = 0
-alignment_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Body"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Body/MarginContainer"]
-layout_mode = 2
+[node name="Body" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.19
+anchor_right = 0.85
+anchor_bottom = 0.91
+grow_horizontal = 2
 focus_mode = 0
 theme_override_font_sizes/bold_italics_font_size = 12
 theme_override_font_sizes/italics_font_size = 12

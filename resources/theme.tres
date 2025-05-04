@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bf85l6d3axxb"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bf85l6d3axxb"]
 
 [ext_resource type="SystemFont" uid="uid://b6bx2kso3vx0d" path="res://resources/font.tres" id="1_d4nwg"]
 
@@ -15,6 +15,66 @@ variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
 base_font = ExtResource("1_d4nwg")
 variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4nwg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ct1h"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_886mr"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.75, 0.75, 0.75, 0.4)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b751m"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.729412, 0.4, 0.290196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owntx"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.729412, 0.4, 0.290196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
 [resource]
 default_font = ExtResource("1_d4nwg")
 default_font_size = 24
@@ -23,3 +83,8 @@ RichTextLabel/fonts/bold_italics_font = SubResource("FontVariation_c8oe4")
 RichTextLabel/fonts/italics_font = SubResource("FontVariation_xcpb1")
 RichTextLabel/fonts/mono_font = ExtResource("1_d4nwg")
 RichTextLabel/fonts/normal_font = ExtResource("1_d4nwg")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_d4nwg")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_7ct1h")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_886mr")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_b751m")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_owntx")

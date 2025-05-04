@@ -230,6 +230,7 @@ fit_content = true
 [node name="Cards" type="HBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 4
 
 [node name="Card" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2

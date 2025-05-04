@@ -1,5 +1,5 @@
 @tool
-extends PanelContainer
+extends TextureRect
 
 @export var data: QuestData:
 	set(new_value):
@@ -10,8 +10,8 @@ extends PanelContainer
 			data.changed.connect(_update_data)
 		_update_data()
 
-@onready var title_label: RichTextLabel = $Title/MarginContainer/RichTextLabel
-@onready var body_label: RichTextLabel = $Body/MarginContainer/RichTextLabel
+@onready var title_label: RichTextLabel = $Title
+@onready var body_label: RichTextLabel = $Body
 
 func _ready() -> void:
 	_update_data()
