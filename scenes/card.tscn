@@ -6,7 +6,7 @@
 [node name="Card" type="TextureRect"]
 offset_right = 125.0
 offset_bottom = 256.0
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 texture = ExtResource("1_d81rb")
 expand_mode = 3
 script = ExtResource("1_6u4wf")
