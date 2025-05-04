@@ -5,7 +5,7 @@ const SPACE_DISTANCE: float = 0.07
 const FIRST_SPACE := Vector3(0, 0, 0.35) + (SPACE_DISTANCE * Vector3.LEFT)
 
 var pawn_positions_blue: Array[int] = [
-	13,
+	-1,
 	-1,
 	-1,
 	-1,
