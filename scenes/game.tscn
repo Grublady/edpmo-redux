@@ -11,13 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://fvqyk2tfaupp" path="res://scenes/die.tscn" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://dovk8imf7qhto" path="res://sprites/Titelbild.png" id="5_iywne"]
 [ext_resource type="Script" uid="uid://b5fsvb2fdare7" path="res://scripts/game_board.gd" id="7_vtaks"]
-[ext_resource type="Texture2D" uid="uid://bmsfp0fxtincq" path="res://sprites/ui/card.png" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://br7tg5mh4haw6" path="res://sprites/characters/rangercut.png" id="12_kvuet"]
 [ext_resource type="Script" uid="uid://b1u505w81iftu" path="res://scripts/quest_overlay.gd" id="12_trtic"]
 [ext_resource type="Shader" uid="uid://cqwbkma8b7cgx" path="res://shaders/blur.gdshader" id="13_ca42v"]
 [ext_resource type="Script" uid="uid://bm8h7sq6ju27f" path="res://scripts/overlay_bg.gd" id="13_rysoc"]
 [ext_resource type="Script" uid="uid://reaf63b6wf7" path="res://scripts/quest_character.gd" id="14_ir15t"]
 [ext_resource type="Theme" uid="uid://bf85l6d3axxb" path="res://resources/theme.tres" id="14_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://ch06po7ssar7o" path="res://scenes/card.tscn" id="18_ssvqc"]
 
 [sub_resource type="Environment" id="Environment_iywne"]
 background_mode = 1
@@ -223,30 +223,18 @@ fit_content = true
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/normal_font_size = 24
-text = "Assign them a suitable quest to make them go away..."
+text = "Assign a suitable quest to make them go away..."
 fit_content = true
 
 [node name="Cards" type="HBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards"]
+[node name="Card" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("12_dinhu")
-expand_mode = 3
-stretch_mode = 4
 
-[node name="TextureRect2" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards"]
+[node name="Card2" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("12_dinhu")
-expand_mode = 3
-stretch_mode = 4
 
-[node name="TextureRect3" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards"]
+[node name="Card3" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
-size_flags_horizontal = 6
-texture = ExtResource("12_dinhu")
-expand_mode = 3
-stretch_mode = 4
