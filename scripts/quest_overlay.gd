@@ -10,6 +10,8 @@ func _ready() -> void:
 	hide()
 
 func enter_view() -> void:
+	generate_adventurer()
+	
 	if is_instance_valid(tween):
 		tween.kill()
 	tween = create_tween()
@@ -35,3 +37,8 @@ func exit_view() -> void:
 	
 	tween.set_parallel(false)
 	tween.tween_callback(hide)
+
+func generate_adventurer() -> void:
+	var adv_name := "Norjor poplarblossom"
+	$MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Title.text = "[b]" + adv_name + "[/b] appears!"
+	$"MarginContainer/PanelContainer/HBoxContainer/Quest Character/TextureRect".texture = ResourceLoader.load("res://sprites/characters/druidcut.png")

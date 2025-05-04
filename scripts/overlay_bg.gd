@@ -1,11 +1,11 @@
-extends Control
+extends Node
 
 const TRANS_TIME: float = 0.25
 
 @export var blur_amount: float = 1
 
-@onready var vertical: ColorRect = $"Blur Vertical"
-@onready var horizontal: ColorRect = $"Blur Horizontal"
+@onready var vertical: ColorRect = $"Blur Vertical/ColorRect"
+@onready var horizontal: ColorRect = $"Blur Horizontal/ColorRect"
 
 var tween: Tween
 

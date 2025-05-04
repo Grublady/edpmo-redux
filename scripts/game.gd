@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var camera: Camera3D = $Camera3D
 @onready var music: AudioStreamPlayer = $"Game Music"
-@onready var overlay_bg: Control = $"Overlay BG"
+@onready var overlay_bg: Node = $"Overlay BG"
 @onready var quest_overlay: Control = $"Quest Overlay"
 
 func _unhandled_input(event: InputEvent) -> void:

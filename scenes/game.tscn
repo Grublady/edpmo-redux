@@ -132,34 +132,32 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.3, 0, -0.3)
 [node name="Node3D" type="Node3D" parent="Game Board"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0702772, 0, 0.208633)
 
-[node name="Overlay BG" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-focus_behavior_recursive = 1
-mouse_behavior_recursive = 1
+[node name="Overlay BG" type="Node" parent="."]
 script = ExtResource("13_rysoc")
 
-[node name="Blur Vertical" type="ColorRect" parent="Overlay BG"]
-material = SubResource("ShaderMaterial_rysoc")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Blur Vertical" type="CanvasLayer" parent="Overlay BG"]
+layer = -1
 
-[node name="Blur Horizontal" type="ColorRect" parent="Overlay BG"]
-material = SubResource("ShaderMaterial_ssvqc")
-layout_mode = 1
+[node name="ColorRect" type="ColorRect" parent="Overlay BG/Blur Vertical"]
+material = SubResource("ShaderMaterial_rysoc")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="Blur Horizontal" type="CanvasLayer" parent="Overlay BG"]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Overlay BG/Blur Horizontal"]
+material = SubResource("ShaderMaterial_ssvqc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Quest Overlay" type="Control" parent="."]
 layout_mode = 3
@@ -205,7 +203,7 @@ stretch_mode = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 12
+theme_override_constants/separation = 8
 
 [node name="Title" type="RichTextLabel" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -216,7 +214,7 @@ theme_override_font_sizes/mono_font_size = 36
 theme_override_font_sizes/normal_font_size = 36
 theme_override_font_sizes/bold_font_size = 36
 bbcode_enabled = true
-text = "[b]Adventurer Name[/b] appears!"
+text = "[b]An Adventurer[/b] appears!"
 fit_content = true
 
 [node name="Subtitle" type="RichTextLabel" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
