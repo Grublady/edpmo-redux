@@ -160,7 +160,9 @@ func _opponent_move() -> void:
 	opponent_timer.stop()
 	opponent_timer.start()
 	await opponent_timer.timeout
-	for i in pawns_red.size():
-		if try_move(i, rolled_value):
+	var pawn_pref := range(pawns_red.size())
+	pawn_pref.shuffle()
+	for pawn in pawn_pref:
+		if try_move(pawn, rolled_value):
 			return
 	pass_turn(true)
