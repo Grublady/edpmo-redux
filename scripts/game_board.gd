@@ -133,9 +133,9 @@ func try_move(pawn: int, roll: int) -> bool:
 	_check_bump(pawn_positions[pawn])
 	
 	if is_player_turn():
-		pawn_node.position = lookup_board_space_position(pawn_positions[pawn])
+		pawn_node.move_to(lookup_board_space_position(pawn_positions[pawn]))
 	else:
-		pawn_node.position = lookup_board_space_position(pawn_positions[pawn]).rotated(Vector3.UP, PI)
+		pawn_node.move_to(lookup_board_space_position(pawn_positions[pawn]).rotated(Vector3.UP, PI))
 	
 	if pawn_positions_blue.all(space_is_home):
 		game_finished(true)
@@ -193,7 +193,7 @@ func _check_bump(at_space: int) -> void:
 		pawns = pawns_red
 	else:
 		pawns = pawns_blue
-	pawns[bumped_pawn].position = pawns[bumped_pawn].initial_position
+	pawns[bumped_pawn].move_to(pawns[bumped_pawn].initial_position)
 
 func _opponent_move() -> void:
 	opponent_die.start_roll()
