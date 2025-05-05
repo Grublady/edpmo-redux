@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://qt1bym4tg58b"]
+[gd_scene load_steps=34 format=3 uid="uid://qt1bym4tg58b"]
 
 [ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
@@ -21,7 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://ch06po7ssar7o" path="res://scenes/card.tscn" id="18_ssvqc"]
 [ext_resource type="Resource" uid="uid://clqav1cnsrh4c" path="res://resources/quests/hands_wanted_quest.tres" id="19_264po"]
 [ext_resource type="Script" uid="uid://db5xaveg6w1hq" path="res://scripts/cards.gd" id="19_bt5mj"]
+[ext_resource type="Texture2D" uid="uid://bumrs4dwktbmu" path="res://sprites/ui/accept.png" id="19_e1j6l"]
 [ext_resource type="Resource" uid="uid://duafya1x8b226" path="res://resources/quests/rat_solution_quest.tres" id="20_1kice"]
+[ext_resource type="Texture2D" uid="uid://bgcfcbjmm4int" path="res://sprites/ui/accept_pressed.png" id="20_pl11u"]
 [ext_resource type="Resource" uid="uid://c4x5xo2boemcp" path="res://resources/quests/cursed_animal_calls_quest.tres" id="21_5newe"]
 
 [sub_resource type="Environment" id="Environment_iywne"]
@@ -191,7 +193,7 @@ grow_vertical = 2
 theme = ExtResource("14_ssvqc")
 script = ExtResource("12_trtic")
 
-[node name="MarginContainer" type="MarginContainer" parent="Quest Overlay"]
+[node name="Margin" type="MarginContainer" parent="Quest Overlay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,31 +205,38 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="PanelContainer" type="PanelContainer" parent="Quest Overlay/MarginContainer"]
+[node name="Panel" type="PanelContainer" parent="Quest Overlay/Margin"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ir15t")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer"]
+[node name="HBox" type="HBoxContainer" parent="Quest Overlay/Margin/Panel"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="Quest Character" type="MarginContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer" node_paths=PackedStringArray("music_player")]
+[node name="QuestCharacter" type="MarginContainer" parent="Quest Overlay/Margin/Panel/HBox" node_paths=PackedStringArray("music_player")]
 layout_mode = 2
 script = ExtResource("14_ir15t")
 music_player = NodePath("../../../../../Game Music")
 
-[node name="TextureRect" type="TextureRect" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/Quest Character"]
+[node name="TextureRect" type="TextureRect" parent="Quest Overlay/Margin/Panel/HBox/QuestCharacter"]
 layout_mode = 2
 texture = ExtResource("12_kvuet")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer"]
+[node name="VBox" type="VBoxContainer" parent="Quest Overlay/Margin/Panel/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="Title" type="RichTextLabel" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="Quest Overlay/Margin/Panel/HBox/VBox"]
+layout_mode = 2
+
+[node name="Text" type="VBoxContainer" parent="Quest Overlay/Margin/Panel/HBox/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="RichTextLabel" parent="Quest Overlay/Margin/Panel/HBox/VBox/Header/Text"]
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/bold_italics_font_size = 36
@@ -239,34 +248,49 @@ bbcode_enabled = true
 text = "[b]An Adventurer[/b] appears!"
 fit_content = true
 
-[node name="Subtitle" type="RichTextLabel" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="Subtitle" type="RichTextLabel" parent="Quest Overlay/Margin/Panel/HBox/VBox/Header/Text"]
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/normal_font_size = 24
 text = "Assign a suitable quest to make them go away..."
 fit_content = true
 
-[node name="Cards" type="HBoxContainer" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="ConfirmButton" type="TextureButton" parent="Quest Overlay/Margin/Panel/HBox/VBox/Header"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("19_e1j6l")
+texture_pressed = ExtResource("20_pl11u")
+stretch_mode = 5
+
+[node name="Cards" type="HBoxContainer" parent="Quest Overlay/Margin/Panel/HBox/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 80
 script = ExtResource("19_bt5mj")
 
-[node name="Card" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
+[node name="Card" parent="Quest Overlay/Margin/Panel/HBox/VBox/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
 data = ExtResource("19_264po")
 
-[node name="Card2" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
+[node name="Card2" parent="Quest Overlay/Margin/Panel/HBox/VBox/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
 data = ExtResource("20_1kice")
 
-[node name="Card3" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
+[node name="Card3" parent="Quest Overlay/Margin/Panel/HBox/VBox/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
 data = ExtResource("21_5newe")
 
-[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card" to="Quest Overlay" method="_on_quest_selected"]
-[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card" to="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" method="deselect_all" unbinds=1]
-[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card2" to="Quest Overlay" method="_on_quest_selected"]
-[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card2" to="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" method="deselect_all" unbinds=1]
-[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card3" to="Quest Overlay" method="_on_quest_selected"]
-[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card3" to="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" method="deselect_all" unbinds=1]
+[connection signal="pressed" from="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" to="Quest Overlay" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" to="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card" method="deselect"]
+[connection signal="pressed" from="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" to="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card2" method="deselect"]
+[connection signal="pressed" from="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" to="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card3" method="deselect"]
+[connection signal="pressed" from="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" to="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" method="hide"]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card" to="Quest Overlay" method="_on_quest_selected"]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card" to="Quest Overlay/Margin/Panel/HBox/VBox/Cards" method="deselect_all" unbinds=1]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card" to="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" method="show" unbinds=1]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card2" to="Quest Overlay" method="_on_quest_selected"]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card2" to="Quest Overlay/Margin/Panel/HBox/VBox/Cards" method="deselect_all" unbinds=1]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card2" to="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" method="show" unbinds=1]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card3" to="Quest Overlay" method="_on_quest_selected"]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card3" to="Quest Overlay/Margin/Panel/HBox/VBox/Cards" method="deselect_all" unbinds=1]
+[connection signal="selected" from="Quest Overlay/Margin/Panel/HBox/VBox/Cards/Card3" to="Quest Overlay/Margin/Panel/HBox/VBox/Header/ConfirmButton" method="show" unbinds=1]
