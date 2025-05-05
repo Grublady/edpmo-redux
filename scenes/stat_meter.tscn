@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfwompr43k6gs"]
+
+[ext_resource type="Script" uid="uid://68dsbdo53tu4" path="res://scripts/stat_meter.gd" id="1_sgw0o"]
+[ext_resource type="Script" uid="uid://d0e5blhfpaqwt" path="res://scripts/stat_progress_bar.gd" id="2_glkv8"]
+
+[node name="StatMeter" type="HBoxContainer"]
+offset_right = 200.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+script = ExtResource("1_sgw0o")
+value = 0.5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 50.0
+show_percentage = false
+script = ExtResource("2_glkv8")

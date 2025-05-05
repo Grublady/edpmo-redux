@@ -1,6 +1,11 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://bf85l6d3axxb"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bf85l6d3axxb"]
 
 [ext_resource type="SystemFont" uid="uid://b6bx2kso3vx0d" path="res://resources/font.tres" id="1_d4nwg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aaf3v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yp2uj"]
+bg_color = Color(0.9, 0.9, 0.9, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_y51rq"]
 base_font = ExtResource("1_d4nwg")
@@ -78,6 +83,8 @@ corner_detail = 6
 [resource]
 default_font = ExtResource("1_d4nwg")
 default_font_size = 24
+ProgressBar/styles/background = SubResource("StyleBoxFlat_aaf3v")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_yp2uj")
 RichTextLabel/fonts/bold_font = SubResource("FontVariation_y51rq")
 RichTextLabel/fonts/bold_italics_font = SubResource("FontVariation_c8oe4")
 RichTextLabel/fonts/italics_font = SubResource("FontVariation_xcpb1")

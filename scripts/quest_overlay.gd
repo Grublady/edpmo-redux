@@ -70,9 +70,9 @@ func exit_view() -> void:
 	tween.tween_callback(hide)
 
 func generate_adventurer() -> void:
-	$Margin/Panel/HBox/VBox/Header/Text/Title.text = "[b]" + adventurer_names.pick_random() + "[/b] appears!"
-	$Margin/Panel/HBox/QuestCharacter/TextureRect.texture = adventurer_textures.pick_random()
+	$Margin/Panel/VBox/HBox/VBox/Header/Text/Title.text = "[b]" + adventurer_names.pick_random() + "[/b] appears!"
+	$Margin/Panel/VBox/HBox/QuestCharacter/TextureRect.texture = adventurer_textures.pick_random()
 	quests.shuffle()
-	$Margin/Panel/HBox/VBox/Cards/Card.data = quests[0]
-	$Margin/Panel/HBox/VBox/Cards/Card2.data = quests[1]
-	$Margin/Panel/HBox/VBox/Cards/Card3.data = quests[2]
+	$Margin/Panel/VBox/HBox/VBox/Cards/Card.data = quests[0]
+	$Margin/Panel/VBox/HBox/VBox/Cards/Card2.data = quests[1]
+	$Margin/Panel/VBox/HBox/VBox/Cards/Card3.data = quests[2]
