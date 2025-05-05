@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://qt1bym4tg58b"]
+[gd_scene load_steps=32 format=3 uid="uid://qt1bym4tg58b"]
 
 [ext_resource type="Script" uid="uid://by4xl4pxvghd2" path="res://scripts/game.gd" id="1_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://bjc78ay8yy2p6" path="res://music/do_not_disturb_A.ogg" id="1_u5sy4"]
@@ -20,6 +20,7 @@
 [ext_resource type="Theme" uid="uid://bf85l6d3axxb" path="res://resources/theme.tres" id="14_ssvqc"]
 [ext_resource type="PackedScene" uid="uid://ch06po7ssar7o" path="res://scenes/card.tscn" id="18_ssvqc"]
 [ext_resource type="Resource" uid="uid://clqav1cnsrh4c" path="res://resources/quests/hands_wanted_quest.tres" id="19_264po"]
+[ext_resource type="Script" uid="uid://db5xaveg6w1hq" path="res://scripts/cards.gd" id="19_bt5mj"]
 [ext_resource type="Resource" uid="uid://duafya1x8b226" path="res://resources/quests/rat_solution_quest.tres" id="20_1kice"]
 [ext_resource type="Resource" uid="uid://c4x5xo2boemcp" path="res://resources/quests/cursed_animal_calls_quest.tres" id="21_5newe"]
 
@@ -249,6 +250,7 @@ fit_content = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 80
+script = ExtResource("19_bt5mj")
 
 [node name="Card" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
@@ -261,3 +263,10 @@ data = ExtResource("20_1kice")
 [node name="Card3" parent="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" instance=ExtResource("18_ssvqc")]
 layout_mode = 2
 data = ExtResource("21_5newe")
+
+[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card" to="Quest Overlay" method="_on_quest_selected"]
+[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card" to="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" method="deselect_all" unbinds=1]
+[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card2" to="Quest Overlay" method="_on_quest_selected"]
+[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card2" to="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" method="deselect_all" unbinds=1]
+[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card3" to="Quest Overlay" method="_on_quest_selected"]
+[connection signal="selected" from="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards/Card3" to="Quest Overlay/MarginContainer/PanelContainer/HBoxContainer/VBoxContainer/Cards" method="deselect_all" unbinds=1]

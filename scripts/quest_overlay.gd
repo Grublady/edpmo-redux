@@ -11,6 +11,8 @@ var adventurer_names: Array[String] = [
 	"Hiro Izeth",
 ]
 
+var _selected_quest: QuestData = null
+
 @onready var adventurer_textures: Array[Texture2D] = [
 	ResourceLoader.load("res://sprites/characters/clericcut.png"),
 	ResourceLoader.load("res://sprites/characters/druidcut.png"),
@@ -31,6 +33,9 @@ var adventurer_names: Array[String] = [
 func _ready() -> void:
 	position = Vector2(size.x, 0)
 	hide()
+
+func _on_quest_selected(data: QuestData) -> void:
+	_selected_quest = data
 
 func enter_view() -> void:
 	generate_adventurer()

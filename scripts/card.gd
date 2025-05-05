@@ -1,6 +1,8 @@
 @tool
 extends TextureRect
 
+signal selected(data: QuestData)
+
 @export var data: QuestData:
 	set(new_value):
 		if is_instance_valid(data):
@@ -16,6 +18,11 @@ extends TextureRect
 func _ready() -> void:
 	_update_data()
 
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed():
+		get_viewport().set_input_as_handled()
+		select()
+
 func _update_data() -> void:
 	if not is_instance_valid(data):
 		return
@@ -23,3 +30,10 @@ func _update_data() -> void:
 		title_label.text = data.title
 	if is_instance_valid(body_label):
 		body_label.text = data.description
+
+func select() -> void:
+	selected.emit(data)
+	texture = ResourceLoader.load("res://sprites/ui/cardselected.png")
+
+func deselect() -> void:
+	texture = ResourceLoader.load("res://sprites/ui/card.png")
