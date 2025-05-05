@@ -295,20 +295,26 @@ theme_override_constants/separation = 32
 
 [node name="StatMeter" parent="Quest Overlay/Margin/Panel/VBox/Footer" instance=ExtResource("26_bhx41")]
 layout_mode = 2
-stat_name = "Hunger"
+stat_name = "Rations"
+value = 0.8
 
 [node name="StatMeter2" parent="Quest Overlay/Margin/Panel/VBox/Footer" instance=ExtResource("26_bhx41")]
 layout_mode = 2
-stat_name = "Evil"
+stat_name = "Peace"
+value = 0.8
 
 [node name="StatMeter3" parent="Quest Overlay/Margin/Panel/VBox/Footer" instance=ExtResource("26_bhx41")]
 layout_mode = 2
 stat_name = "Money"
+value = 0.8
 
 [node name="StatMeter4" parent="Quest Overlay/Margin/Panel/VBox/Footer" instance=ExtResource("26_bhx41")]
 layout_mode = 2
-stat_name = "Boredom"
+stat_name = "Joy"
+value = 0.8
 
+[connection signal="game_finished" from="Game Board" to="." method="_on_game_finished"]
+[connection signal="game_lost" from="Quest Overlay" to="." method="_on_game_finished" binds= [false]]
 [connection signal="pressed" from="Quest Overlay/Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="Quest Overlay" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="Quest Overlay/Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="Quest Overlay/Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" method="hide"]
 [connection signal="pressed" from="Quest Overlay/Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="Quest Overlay/Margin/Panel/VBox/HBox/VBox/Cards/Card" method="deselect"]

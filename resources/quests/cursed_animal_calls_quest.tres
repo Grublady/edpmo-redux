@@ -6,4 +6,8 @@
 script = ExtResource("1_6b3je")
 title = "Cursed Animal Calls"
 description = "All the animals in the forest started sounding like screaming babies. Rather than calming sounds of crickets, birds and the occasional coyote yelp, the day and nights have been full with a cacophony of wailing baby noises. Find out what caused this noisy chaos and please make it stop."
+rations = -3.0
+peace = 4.0
+money = -1.0
+joy = 0.0
 metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

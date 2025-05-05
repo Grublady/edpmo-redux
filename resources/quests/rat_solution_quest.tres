@@ -6,4 +6,8 @@
 script = ExtResource("1_6b3je")
 title = "Rat Solution"
 description = "There’s at least 500 rats in the tavern basement. Kill them. Relocate them. Teach them to cook and put them to work. Whatever, just get them out of the tavern basement, they need that space for storage."
+rations = -5.0
+peace = -3.0
+money = 5.0
+joy = 3.0
 metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

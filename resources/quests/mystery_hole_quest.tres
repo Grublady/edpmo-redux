@@ -6,4 +6,8 @@
 script = ExtResource("1_6b3je")
 title = "Mystery Hole"
 description = "Dig a mystery hole. What it’s for is none of your damned business. (It should be big enough for a small horse with the upper body of a small person for a head.)"
+rations = 0.0
+peace = -2.0
+money = 4.0
+joy = -2.0
 metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

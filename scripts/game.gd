@@ -24,3 +24,9 @@ func hide_quests() -> void:
 	quest_timer.stop()
 	quest_timer.timeout.connect(show_quests, CONNECT_ONE_SHOT)
 	quest_timer.start()
+
+func _on_game_finished(player_wins: bool) -> void:
+	if player_wins:
+		pass
+	else:
+		pass

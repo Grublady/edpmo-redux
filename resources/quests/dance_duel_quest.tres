@@ -6,4 +6,8 @@
 script = ExtResource("1_6b3je")
 title = "Dance Duel!"
 description = "Help choreograph a high-stakes dance competition to, once and for all, settle a dispute between rival goblin dance troupes in nearby caverns. The heated rivalry has wrecked havoc on local crops with the non-stop dancing."
+rations = 2.0
+peace = -1.0
+money = -4.0
+joy = 3.0
 metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

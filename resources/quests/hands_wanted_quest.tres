@@ -6,4 +6,8 @@
 script = ExtResource("1_6b3je")
 title = "Hands Wanted!"
 description = "Handy Peter woke up with no hands and a note that said \"come find us.\" Go find his hands."
+rations = 3.0
+peace = -2.0
+money = 1.0
+joy = -2.0
 metadata/_custom_type_script = "uid://ctj7ss5pi23g2"

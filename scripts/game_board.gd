@@ -1,5 +1,7 @@
 extends Sprite3D
 
+signal game_finished(player_wins: bool)
+
 const TOTAL_SPACE_COUNT: int = 44
 const PAWNS_PER_PLAYER: int = 4
 const SPACE_DISTANCE: float = 0.07
@@ -138,11 +140,12 @@ func try_move(pawn: int, roll: int) -> bool:
 		pawn_node.move_to(lookup_board_space_position(pawn_positions[pawn]).rotated(Vector3.UP, PI))
 	
 	if pawn_positions_blue.all(space_is_home):
-		game_finished(true)
+		game_finished.emit(true)
 	elif pawn_positions_red.all(space_is_home):
-		game_finished(false)
+		game_finished.emit(false)
+	else:
+		pass_turn()
 	
-	pass_turn()
 	return true
 
 func pass_turn(to_player: bool = not _is_player_turn) -> void:
@@ -166,9 +169,6 @@ func is_player_turn() -> bool:
 
 func space_is_home(space: int) -> bool:
 	return space > (TOTAL_SPACE_COUNT - 1 - PAWNS_PER_PLAYER)
-
-func game_finished(player_wins: bool) -> void:
-	pass
 
 func _check_bump(at_space: int) -> void:
 	if at_space >= 40:

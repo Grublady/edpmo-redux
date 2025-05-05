@@ -1,5 +1,7 @@
 extends Control
 
+signal game_lost
+
 const ENTER_TIME: float = 0.25
 const EXIT_TIME: float = 0.5
 
@@ -38,6 +40,17 @@ func _on_quest_selected(data: QuestData) -> void:
 	_selected_quest = data
 
 func _on_confirm_button_pressed() -> void:
+	$Margin/Panel/VBox/Footer/StatMeter.value += (_selected_quest.rations / 100)
+	$Margin/Panel/VBox/Footer/StatMeter2.value += (_selected_quest.peace / 100)
+	$Margin/Panel/VBox/Footer/StatMeter3.value += (_selected_quest.money / 100)
+	$Margin/Panel/VBox/Footer/StatMeter4.value += (_selected_quest.joy / 100)
+	if (
+			$Margin/Panel/VBox/Footer/StatMeter.value <= 0
+			or $Margin/Panel/VBox/Footer/StatMeter2.value <= 0
+			or $Margin/Panel/VBox/Footer/StatMeter3.value <= 0
+			or $Margin/Panel/VBox/Footer/StatMeter4.value <= 0
+	):
+		game_lost.emit.call_deferred()
 	$"..".hide_quests()
 
 func enter_view() -> void:
