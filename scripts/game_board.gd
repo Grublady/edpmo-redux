@@ -1,6 +1,7 @@
 extends Sprite3D
 
 const TOTAL_SPACE_COUNT: int = 44
+const PAWNS_PER_PLAYER: int = 4
 const SPACE_DISTANCE: float = 0.07
 const FIRST_SPACE := Vector3(0, 0, 0.35) + (SPACE_DISTANCE * Vector3.LEFT)
 
@@ -78,21 +79,21 @@ func _on_player_pawn_input_event(
 func lookup_board_space_position(space: int) -> Vector3:
 	return (
 			FIRST_SPACE
-			
+
 			+ SPACE_DISTANCE * (clampi(space - 0, 0, 4)) * Vector3.FORWARD
 			+ SPACE_DISTANCE * (clampi(space - 4, 0, 4)) * Vector3.LEFT
 			+ SPACE_DISTANCE * (clampi(space - 8, 0, 2)) * Vector3.FORWARD
 			+ SPACE_DISTANCE * (clampi(space - 10, 0, 4)) * Vector3.RIGHT
 			+ SPACE_DISTANCE * (clampi(space - 14, 0, 4)) * Vector3.FORWARD
 			+ SPACE_DISTANCE * (clampi(space - 18, 0, 2)) * Vector3.RIGHT
-			
+
 			+ SPACE_DISTANCE * (clampi(space - 20, 0, 4)) * Vector3.BACK
 			+ SPACE_DISTANCE * (clampi(space - 24, 0, 4)) * Vector3.RIGHT
 			+ SPACE_DISTANCE * (clampi(space - 28, 0, 2)) * Vector3.BACK
 			+ SPACE_DISTANCE * (clampi(space - 30, 0, 4)) * Vector3.LEFT
 			+ SPACE_DISTANCE * (clampi(space - 34, 0, 4)) * Vector3.BACK
 			+ SPACE_DISTANCE * (clampi(space - 38, 0, 1)) * Vector3.LEFT
-			
+
 			+ SPACE_DISTANCE * (clampi(space - 39, 0, 4)) * Vector3.FORWARD
 	)
 
@@ -134,16 +135,21 @@ func try_move(pawn: int, roll: int) -> bool:
 	else:
 		pawn_node.position = lookup_board_space_position(pawn_positions[pawn]).rotated(Vector3.UP, PI)
 	
+	if pawn_positions_blue.all(space_is_home):
+		game_finished(true)
+	elif pawn_positions_red.all(space_is_home):
+		game_finished(false)
+	
 	pass_turn()
 	return true
 
 func pass_turn(to_player: bool = not _is_player_turn) -> void:
 	_is_player_turn = to_player
-	
+
 	rolled_value = -1
 	player_die.active = _is_player_turn
 	opponent_die.active = not _is_player_turn
-	
+
 	if _is_player_turn:
 		player_die.roll_finished.connect(_on_die_roll_finished, CONNECT_ONE_SHOT)
 	else:
@@ -156,23 +162,29 @@ func pass_turn(to_player: bool = not _is_player_turn) -> void:
 func is_player_turn() -> bool:
 	return _is_player_turn
 
+func space_is_home(space: int) -> bool:
+	return space > (TOTAL_SPACE_COUNT - 1 - PAWNS_PER_PLAYER)
+
+func game_finished(player_wins: bool) -> void:
+	pass
+
 func _check_bump(at_space: int) -> void:
 	if at_space >= 40:
 		# Home zone
 		return
-	
+
 	var other_player_pawn_positions: Array[int]
 	if is_player_turn():
 		other_player_pawn_positions = pawn_positions_red
 	else:
 		other_player_pawn_positions = pawn_positions_blue
-	
+
 	var transformed_space := (at_space + 20) % 40
 	var bumped_pawn := other_player_pawn_positions.find(transformed_space)
-	
+
 	if bumped_pawn == -1:
 		return
-	
+
 	other_player_pawn_positions[bumped_pawn] = -1
 	var pawns: Array[CollisionObject3D]
 	if is_player_turn():
