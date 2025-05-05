@@ -4,14 +4,10 @@ extends Node3D
 @onready var music: AudioStreamPlayer = $"Game Music"
 @onready var overlay_bg: Node = $"Overlay BG"
 @onready var quest_overlay: Control = $"Quest Overlay"
+@onready var quest_timer: Timer = $"Quest Timer"
 
-func _unhandled_input(event: InputEvent) -> void:
-	#if event.is_action_pressed(&"ui_left"):
-		#get_viewport().set_input_as_handled()
-		#hide_quests()
-	if event.is_action_pressed(&"ui_right"):
-		get_viewport().set_input_as_handled()
-		show_quests()
+func _ready() -> void:
+	hide_quests()
 
 func show_quests() -> void:
 	camera.focus_quests()
@@ -24,3 +20,7 @@ func hide_quests() -> void:
 	music.switch_to_variation(0)
 	overlay_bg.exit_bg()
 	quest_overlay.exit_view()
+	
+	quest_timer.stop()
+	quest_timer.timeout.connect(show_quests, CONNECT_ONE_SHOT)
+	quest_timer.start()
