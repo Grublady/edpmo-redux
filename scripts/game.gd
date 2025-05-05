@@ -27,6 +27,6 @@ func hide_quests() -> void:
 
 func _on_game_finished(player_wins: bool) -> void:
 	if player_wins:
-		pass
+		get_tree().change_scene_to_file("res://scenes/game_win.tscn")
 	else:
-		pass
+		get_tree().change_scene_to_file("res://scenes/game_lose.tscn")
