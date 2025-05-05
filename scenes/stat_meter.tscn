@@ -13,6 +13,7 @@ value = 0.5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 2
+focus_mode = 0
 fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
