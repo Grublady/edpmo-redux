@@ -79,21 +79,23 @@ func _on_player_pawn_input_event(
 func lookup_board_space_position(space: int) -> Vector3:
 	return (
 			FIRST_SPACE
-
+			
 			+ SPACE_DISTANCE * (clampi(space - 0, 0, 4)) * Vector3.FORWARD
 			+ SPACE_DISTANCE * (clampi(space - 4, 0, 4)) * Vector3.LEFT
 			+ SPACE_DISTANCE * (clampi(space - 8, 0, 2)) * Vector3.FORWARD
+			
 			+ SPACE_DISTANCE * (clampi(space - 10, 0, 4)) * Vector3.RIGHT
 			+ SPACE_DISTANCE * (clampi(space - 14, 0, 4)) * Vector3.FORWARD
 			+ SPACE_DISTANCE * (clampi(space - 18, 0, 2)) * Vector3.RIGHT
-
+			
 			+ SPACE_DISTANCE * (clampi(space - 20, 0, 4)) * Vector3.BACK
 			+ SPACE_DISTANCE * (clampi(space - 24, 0, 4)) * Vector3.RIGHT
 			+ SPACE_DISTANCE * (clampi(space - 28, 0, 2)) * Vector3.BACK
+			
 			+ SPACE_DISTANCE * (clampi(space - 30, 0, 4)) * Vector3.LEFT
 			+ SPACE_DISTANCE * (clampi(space - 34, 0, 4)) * Vector3.BACK
 			+ SPACE_DISTANCE * (clampi(space - 38, 0, 1)) * Vector3.LEFT
-
+			
 			+ SPACE_DISTANCE * (clampi(space - 39, 0, 4)) * Vector3.FORWARD
 	)
 
