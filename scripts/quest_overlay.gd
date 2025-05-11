@@ -48,6 +48,16 @@ var _selected_quest: QuestData = null
 	ResourceLoader.load("res://resources/quests/rat_solution_quest.tres"),
 ]
 
+func _init() -> void:
+	EventBus.game_focus.connect(_on_event_game_focus)
+
+func _on_event_game_focus(event: EventBus.GameFocus) -> void:
+	match event:
+		EventBus.GameFocus.game_board:
+			exit_view()
+		EventBus.GameFocus.quests:
+			enter_view()
+
 func _ready() -> void:
 	position = Vector2(size.x, 0)
 	hide()

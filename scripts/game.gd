@@ -10,16 +10,10 @@ func _ready() -> void:
 	hide_quests()
 
 func show_quests() -> void:
-	camera.focus_quests()
-	music.switch_to_variation(1)
-	overlay_bg.enter_bg()
-	quest_overlay.enter_view()
+	EventBus.game_focus.emit(EventBus.GameFocus.quests)
 
 func hide_quests() -> void:
-	camera.focus_boardgame()
-	music.switch_to_variation(0)
-	overlay_bg.exit_bg()
-	quest_overlay.exit_view()
+	EventBus.game_focus.emit(EventBus.GameFocus.game_board)
 	
 	quest_timer.stop()
 	quest_timer.timeout.connect(show_quests, CONNECT_ONE_SHOT)

@@ -15,8 +15,18 @@ var intensity: float = 0:
 		(vertical.material as ShaderMaterial).set_shader_parameter(&"amount", intensity * blur_amount)
 		(horizontal.material as ShaderMaterial).set_shader_parameter(&"amount", intensity * blur_amount)
 
+func _init() -> void:
+	EventBus.game_focus.connect(_on_event_game_focus)
+
 func _ready() -> void:
 	intensity = intensity
+
+func _on_event_game_focus(event: EventBus.GameFocus) -> void:
+	match event:
+		EventBus.GameFocus.game_board:
+			exit_bg()
+		EventBus.GameFocus.quests:
+			enter_bg()
 
 func enter_bg() -> void:
 	if is_instance_valid(tween):

@@ -11,22 +11,20 @@ var focus: float:
 		focus = new_value
 		quaternion = quaternion_a.slerp(quaternion_b, focus)
 
-func focus_boardgame() -> void:
-	if is_instance_valid(tween):
-		tween.kill()
-	tween = create_tween()
-	tween.set_parallel()
-	tween.set_trans(Tween.TRANS_QUAD)
-	
-	tween.tween_property(self, ^"focus", 0, TRANS_TIME)
-	tween.tween_property(self, ^"fov", 60, TRANS_TIME)
+func _init() -> void:
+	EventBus.game_focus.connect(_on_event_game_focus)
 
-func focus_quests() -> void:
+func _on_event_game_focus(event: EventBus.GameFocus) -> void:
 	if is_instance_valid(tween):
 		tween.kill()
 	tween = create_tween()
 	tween.set_parallel()
 	tween.set_trans(Tween.TRANS_QUAD)
 	
-	tween.tween_property(self, ^"focus", 1, TRANS_TIME)
-	tween.tween_property(self, ^"fov", 90, TRANS_TIME)
+	match event:
+		EventBus.GameFocus.game_board:
+			tween.tween_property(self, ^"focus", 0, TRANS_TIME)
+			tween.tween_property(self, ^"fov", 60, TRANS_TIME)
+		EventBus.GameFocus.quests:
+			tween.tween_property(self, ^"focus", 1, TRANS_TIME)
+			tween.tween_property(self, ^"fov", 90, TRANS_TIME)
