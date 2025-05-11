@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://dilhx5y7v83t8"]
+
+[ext_resource type="Texture2D" uid="uid://curfnqcsgsfrh" path="res://sprites/boardgame/game_board.png" id="1_qmxhh"]
+[ext_resource type="Script" uid="uid://b5fsvb2fdare7" path="res://scripts/game_board.gd" id="2_8nsfp"]
+[ext_resource type="PackedScene" uid="uid://fvqyk2tfaupp" path="res://scenes/die.tscn" id="3_mmjnl"]
+[ext_resource type="Script" uid="uid://bu0saqmb5fl51" path="res://scripts/pass_button.gd" id="4_cwqdw"]
+[ext_resource type="PackedScene" uid="uid://doun6uq5joi5a" path="res://scenes/pawn_blue.tscn" id="5_04ve2"]
+[ext_resource type="PackedScene" uid="uid://pajerr1pwy8w" path="res://scenes/pawn_red.tscn" id="6_c1to4"]
+
+[sub_resource type="Gradient" id="Gradient_vtaks"]
+colors = PackedColorArray(0.114, 0.141233, 0.2, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kvpfn"]
+gradient = SubResource("Gradient_vtaks")
+height = 32
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dinhu"]
+size = Vector3(0.64, 0.001, 0.32)
+
+[node name="Game Board" type="Sprite3D"]
+pixel_size = 0.0003
+axis = 1
+double_sided = false
+render_priority = -1
+texture = ExtResource("1_qmxhh")
+script = ExtResource("2_8nsfp")
+
+[node name="Player Die" parent="." instance=ExtResource("3_mmjnl")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.2, 0, 0.25)
+
+[node name="Opponent Die" parent="." instance=ExtResource("3_mmjnl")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.2, 0, -0.25)
+
+[node name="Pass Button" type="Area3D" parent="."]
+transform = Transform3D(0.259808, 0.075, 0.129904, 0, 0.259808, -0.15, -0.15, 0.129904, 0.225, -0.45, 0.05, 0.25)
+script = ExtResource("4_cwqdw")
+
+[node name="Sprite3D" type="Sprite3D" parent="Pass Button"]
+axis = 1
+texture = SubResource("GradientTexture2D_kvpfn")
+
+[node name="Label3D" type="Label3D" parent="Pass Button"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.05, 0)
+pixel_size = 0.0025
+text = "Pass"
+font_size = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pass Button"]
+shape = SubResource("BoxShape3D_dinhu")
+
+[node name="Opponent Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Pawn (Blue) 1" parent="." instance=ExtResource("5_04ve2")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.2, 0, 0.2)
+
+[node name="Pawn (Blue) 2" parent="." instance=ExtResource("5_04ve2")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.3, 0, 0.2)
+
+[node name="Pawn (Blue) 3" parent="." instance=ExtResource("5_04ve2")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.2, 0, 0.3)
+
+[node name="Pawn (Blue) 4" parent="." instance=ExtResource("5_04ve2")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.3, 0, 0.3)
+
+[node name="Pawn (Red) 1" parent="." instance=ExtResource("6_c1to4")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.2, 0, -0.2)
+
+[node name="Pawn (Red) 2" parent="." instance=ExtResource("6_c1to4")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.3, 0, -0.2)
+
+[node name="Pawn (Red) 3" parent="." instance=ExtResource("6_c1to4")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.2, 0, -0.3)
+
+[node name="Pawn (Red) 4" parent="." instance=ExtResource("6_c1to4")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.3, 0, -0.3)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0702772, 0, 0.208633)
