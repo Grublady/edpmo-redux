@@ -15,6 +15,22 @@ var adventurer_names: Array[String] = [
 
 var _selected_quest: QuestData = null
 
+@onready var title_text: RichTextLabel = $Margin/Panel/VBox/HBox/VBox/Header/Text/Title
+@onready var quest_character_texture: TextureRect = $Margin/Panel/VBox/HBox/QuestCharacter/TextureRect
+
+@onready var cards: Array[TextureRect] = [
+	$Margin/Panel/VBox/HBox/VBox/Cards/Card,
+	$Margin/Panel/VBox/HBox/VBox/Cards/Card2,
+	$Margin/Panel/VBox/HBox/VBox/Cards/Card3,
+]
+
+@onready var stat_meters: Dictionary[StringName, Node] = {
+	&"rations": $Margin/Panel/VBox/Footer/StatMeter,
+	&"peace": $Margin/Panel/VBox/Footer/StatMeter2,
+	&"money": $Margin/Panel/VBox/Footer/StatMeter3,
+	&"joy": $Margin/Panel/VBox/Footer/StatMeter4,
+}
+
 @onready var adventurer_textures: Array[Texture2D] = [
 	ResourceLoader.load("res://sprites/characters/clericcut.png"),
 	ResourceLoader.load("res://sprites/characters/druidcut.png"),
@@ -40,17 +56,14 @@ func _on_quest_selected(data: QuestData) -> void:
 	_selected_quest = data
 
 func _on_confirm_button_pressed() -> void:
-	$Margin/Panel/VBox/Footer/StatMeter.value += (_selected_quest.rations / 100)
-	$Margin/Panel/VBox/Footer/StatMeter2.value += (_selected_quest.peace / 100)
-	$Margin/Panel/VBox/Footer/StatMeter3.value += (_selected_quest.money / 100)
-	$Margin/Panel/VBox/Footer/StatMeter4.value += (_selected_quest.joy / 100)
-	if (
-			$Margin/Panel/VBox/Footer/StatMeter.value <= 0
-			or $Margin/Panel/VBox/Footer/StatMeter2.value <= 0
-			or $Margin/Panel/VBox/Footer/StatMeter3.value <= 0
-			or $Margin/Panel/VBox/Footer/StatMeter4.value <= 0
-	):
-		game_lost.emit.call_deferred()
+	stat_meters[&"rations"].value += (_selected_quest.rations / 100)
+	stat_meters[&"peace"].value += (_selected_quest.peace / 100)
+	stat_meters[&"money"].value += (_selected_quest.money / 100)
+	stat_meters[&"joy"].value += (_selected_quest.joy / 100)
+	for meter in stat_meters.values():
+		if meter.value <= 0:
+			game_lost.emit.call_deferred()
+			break
 	$"..".hide_quests()
 
 func enter_view() -> void:
@@ -83,9 +96,8 @@ func exit_view() -> void:
 	tween.tween_callback(hide)
 
 func generate_adventurer() -> void:
-	$Margin/Panel/VBox/HBox/VBox/Header/Text/Title.text = "[b]" + adventurer_names.pick_random() + "[/b] appears!"
-	$Margin/Panel/VBox/HBox/QuestCharacter/TextureRect.texture = adventurer_textures.pick_random()
+	title_text.text = "[b]" + adventurer_names.pick_random() + "[/b] appears!"
+	quest_character_texture.texture = adventurer_textures.pick_random()
 	quests.shuffle()
-	$Margin/Panel/VBox/HBox/VBox/Cards/Card.data = quests[0]
-	$Margin/Panel/VBox/HBox/VBox/Cards/Card2.data = quests[1]
-	$Margin/Panel/VBox/HBox/VBox/Cards/Card3.data = quests[2]
+	for i in cards.size():
+		cards[i].data = quests[i]
