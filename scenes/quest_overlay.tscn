@@ -1,0 +1,166 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnguhnim71e0s"]
+
+[ext_resource type="Theme" uid="uid://bf85l6d3axxb" path="res://resources/theme.tres" id="1_3fr4i"]
+[ext_resource type="Script" uid="uid://b1u505w81iftu" path="res://scripts/quest_overlay.gd" id="2_tyoht"]
+[ext_resource type="Script" uid="uid://reaf63b6wf7" path="res://scripts/quest_character.gd" id="3_cqpeu"]
+[ext_resource type="Texture2D" uid="uid://br7tg5mh4haw6" path="res://sprites/characters/rangercut.png" id="4_sr7mk"]
+[ext_resource type="Texture2D" uid="uid://bumrs4dwktbmu" path="res://sprites/ui/accept.png" id="5_u2tx5"]
+[ext_resource type="Texture2D" uid="uid://bgcfcbjmm4int" path="res://sprites/ui/accept_pressed.png" id="6_rthgu"]
+[ext_resource type="Script" uid="uid://db5xaveg6w1hq" path="res://scripts/cards.gd" id="7_vds87"]
+[ext_resource type="PackedScene" uid="uid://ch06po7ssar7o" path="res://scenes/card.tscn" id="8_eriru"]
+[ext_resource type="Resource" uid="uid://clqav1cnsrh4c" path="res://resources/quests/hands_wanted_quest.tres" id="9_8lask"]
+[ext_resource type="Resource" uid="uid://duafya1x8b226" path="res://resources/quests/rat_solution_quest.tres" id="10_o1pk4"]
+[ext_resource type="Resource" uid="uid://c4x5xo2boemcp" path="res://resources/quests/cursed_animal_calls_quest.tres" id="11_jgum4"]
+[ext_resource type="PackedScene" uid="uid://cfwompr43k6gs" path="res://scenes/stat_meter.tscn" id="12_u7yo8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir15t"]
+content_margin_left = 25.0
+content_margin_top = 25.0
+content_margin_right = 25.0
+content_margin_bottom = 25.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Quest Overlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_3fr4i")
+script = ExtResource("2_tyoht")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Panel" type="PanelContainer" parent="Margin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ir15t")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBox" type="HBoxContainer" parent="Margin/Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 25
+
+[node name="QuestCharacter" type="MarginContainer" parent="Margin/Panel/VBox/HBox" node_paths=PackedStringArray("music_player")]
+layout_mode = 2
+script = ExtResource("3_cqpeu")
+music_player = NodePath("")
+
+[node name="TextureRect" type="TextureRect" parent="Margin/Panel/VBox/HBox/QuestCharacter"]
+layout_mode = 2
+texture = ExtResource("4_sr7mk")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Panel/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="Margin/Panel/VBox/HBox/VBox"]
+layout_mode = 2
+
+[node name="Text" type="VBoxContainer" parent="Margin/Panel/VBox/HBox/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="RichTextLabel" parent="Margin/Panel/VBox/HBox/VBox/Header/Text"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/bold_italics_font_size = 36
+theme_override_font_sizes/italics_font_size = 36
+theme_override_font_sizes/mono_font_size = 36
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b]An Adventurer[/b] appears!"
+fit_content = true
+
+[node name="Subtitle" type="RichTextLabel" parent="Margin/Panel/VBox/HBox/VBox/Header/Text"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/normal_font_size = 24
+text = "Assign a suitable quest to make them go away..."
+fit_content = true
+
+[node name="ConfirmButton" type="TextureButton" parent="Margin/Panel/VBox/HBox/VBox/Header"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("5_u2tx5")
+texture_pressed = ExtResource("6_rthgu")
+stretch_mode = 5
+
+[node name="Cards" type="HBoxContainer" parent="Margin/Panel/VBox/HBox/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 80
+script = ExtResource("7_vds87")
+
+[node name="Card" parent="Margin/Panel/VBox/HBox/VBox/Cards" instance=ExtResource("8_eriru")]
+layout_mode = 2
+data = ExtResource("9_8lask")
+
+[node name="Card2" parent="Margin/Panel/VBox/HBox/VBox/Cards" instance=ExtResource("8_eriru")]
+layout_mode = 2
+data = ExtResource("10_o1pk4")
+
+[node name="Card3" parent="Margin/Panel/VBox/HBox/VBox/Cards" instance=ExtResource("8_eriru")]
+layout_mode = 2
+data = ExtResource("11_jgum4")
+
+[node name="Footer" type="HBoxContainer" parent="Margin/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="StatMeter" parent="Margin/Panel/VBox/Footer" instance=ExtResource("12_u7yo8")]
+layout_mode = 2
+stat_name = "Rations"
+value = 0.8
+
+[node name="StatMeter2" parent="Margin/Panel/VBox/Footer" instance=ExtResource("12_u7yo8")]
+layout_mode = 2
+stat_name = "Peace"
+value = 0.8
+
+[node name="StatMeter3" parent="Margin/Panel/VBox/Footer" instance=ExtResource("12_u7yo8")]
+layout_mode = 2
+stat_name = "Money"
+value = 0.8
+
+[node name="StatMeter4" parent="Margin/Panel/VBox/Footer" instance=ExtResource("12_u7yo8")]
+layout_mode = 2
+stat_name = "Joy"
+value = 0.8
+
+[connection signal="pressed" from="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" method="hide"]
+[connection signal="pressed" from="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="Margin/Panel/VBox/HBox/VBox/Cards/Card" method="deselect"]
+[connection signal="pressed" from="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="Margin/Panel/VBox/HBox/VBox/Cards/Card2" method="deselect"]
+[connection signal="pressed" from="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" to="Margin/Panel/VBox/HBox/VBox/Cards/Card3" method="deselect"]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card" to="." method="_on_quest_selected"]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card" to="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" method="show" unbinds=1]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card" to="Margin/Panel/VBox/HBox/VBox/Cards" method="deselect_all" unbinds=1]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card2" to="." method="_on_quest_selected"]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card2" to="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" method="show" unbinds=1]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card2" to="Margin/Panel/VBox/HBox/VBox/Cards" method="deselect_all" unbinds=1]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card3" to="." method="_on_quest_selected"]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card3" to="Margin/Panel/VBox/HBox/VBox/Header/ConfirmButton" method="show" unbinds=1]
+[connection signal="selected" from="Margin/Panel/VBox/HBox/VBox/Cards/Card3" to="Margin/Panel/VBox/HBox/VBox/Cards" method="deselect_all" unbinds=1]
