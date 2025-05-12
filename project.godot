@@ -15,6 +15,10 @@ run/main_scene="uid://c6kip32erl8bp"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="uid://cjqjyany2ddik"
 
+[audio]
+
+driver/mix_rate=48000
+
 [autoload]
 
 EventBus="*res://scripts/event_bus.gd"
