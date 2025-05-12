@@ -1,11 +1,15 @@
 extends AudioStreamPlayer
 
 const TRANS_TIME: float = 0.5
+const BPM: float = 120
 
 var tween: Tween
 
 func _init() -> void:
 	EventBus.game_focus.connect(_on_event_game_focus)
+
+func _enter_tree() -> void:
+	AudioSync.source = self
 
 func _on_event_game_focus(event: EventBus.GameFocus) -> void:
 	match event:

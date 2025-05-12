@@ -59,10 +59,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 25
 
-[node name="QuestCharacter" type="MarginContainer" parent="Margin/Panel/VBox/HBox" node_paths=PackedStringArray("music_player")]
+[node name="QuestCharacter" type="MarginContainer" parent="Margin/Panel/VBox/HBox"]
 layout_mode = 2
 script = ExtResource("3_cqpeu")
-music_player = NodePath("")
 
 [node name="TextureRect" type="TextureRect" parent="Margin/Panel/VBox/HBox/QuestCharacter"]
 layout_mode = 2
